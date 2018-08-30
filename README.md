@@ -1,2 +1,7 @@
 # qppolice
-特警后台Fastadmin
+Police后台Fastadmin
+
+
+
+Default entry ：/admin
+Use frame ：ThinkPHP5
