@@ -1,0 +1,69 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="c-police_officer" class="control-label col-xs-12 col-sm-2">{:__('姓名')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-book_id" data-rule="required" class="form-control" type="text" value="{$name}" readonly>
+            <input type="hidden" name="row[police_officer]" value="{$id}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-cate_id" class="control-label col-xs-12 col-sm-2">{:__('科目类')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <!-- <input id="c-cate_id" data-rule="required" data-source="cate/index" class="form-control selectpage" name="row[cate_id]" type="text" value=""> -->
+            {:build_select('row[cate_id]', $cate_name,null,  ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-list_id" class="control-label col-xs-12 col-sm-2">{:__('科目名称')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <!-- <input id="c-cate_id" data-rule="required" data-source="cate/index" class="form-control selectpage" name="row[cate_id]" type="text" value=""> -->
+            {:build_select('row[list_id]', $list_name,null,  ['class'=>'form-control selectpicker', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-achievement" class="control-label col-xs-12 col-sm-2">{:__('Achievement')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-achievement" class="form-control" name="row[achievement]" type="text">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-result" class="control-label col-xs-12 col-sm-2">{:__('Result')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <!--<input id="c-result" class="form-control" name="row[result]" type="text">-->
+            <select id="c-result" class="form-control" name="row[result]">
+                <option value ="" selected="selected">请选择</option>
+                <option value="1">优秀</option>
+                <option value="2">良好</option>
+                <option value="3">合格</option>
+                <option value="4">不合格</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-referee" class="control-label col-xs-12 col-sm-2">{:__('Referee')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-referee" class="form-control" name="row[referee]" type="text">
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-status" class="control-label col-xs-12 col-sm-2">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[status]', ['1'=>'已发布', '0'=>'未发布'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-testtime" class="control-label col-xs-12 col-sm-2">{:__('Testtime')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-testtime" class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" name="row[testtime]" type="text" value="{:date('Y-m-d H:i:s')}">
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

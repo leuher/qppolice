@@ -1,0 +1,81 @@
+<div id="comment-container"> 
+    <!-- S 评论列表 -->
+    <div id="commentlist">
+        {assign name="aid" value="$[aid]" /}
+        {cms:commentlist id="comment" type="[type]" aid="$aid" pagesize="10"}
+        <dl id="comment-{$comment.id}"> 
+            <dt><a href="{$comment.website}" title="查看{$comment.username}的主页" rel="nofollow" target="_blank"><img alt='' src='https://secure.gravatar.com/avatar/{$comment.email|md5}?s=48&d=&r=X' class='avatar' /></a></dt>
+            <dd>
+                <div class="parent">
+                    <cite><a href='{$comment.website}' rel='external nofollow' target="_blank">{$comment.username}</a></cite>
+                    <small> {$comment.createtime|human_date} <a href="javascript:;" rel="{$comment.id}" title="" class="reply">回复TA</a></small>
+                    <p>{$comment.content}</p> 
+                </div>
+                {volist name="$comment['sublist']" id='subcomment' }
+                <dl id="comment-{$subcomment.id}"> 
+                    <dt><a href="{$subcomment.website}" title="查看{$subcomment.username}的主页" rel="nofollow" target="_blank"><img alt='' src='https://secure.gravatar.com/avatar/{$subcomment.email|md5}?s=48&d=&r=X' class='avatar' /></a></dt>
+                    <dd>
+                        <div class="parent">
+                            <cite><a href='{$comment.website}' rel='external nofollow' target="_blank">{$subcomment.username}</a></cite>
+                            <small> {$subcomment.createtime|human_date} <a href="javascript:;" rel="{$comment.id}" title="@{$subcomment.username} " title="" class="reply">回复TA</a></small>
+                            <p>{$subcomment.content}</p> 
+                        </div>
+                    </dd>
+                    <div class="clearfix"></div>
+                </dl>
+                {/volist}
+            </dd>
+            <div class="clearfix"></div>
+        </dl>
+        {/cms:commentlist}
+    </div>
+    <!-- E 评论列表 -->
+
+    <!-- S 评论分页 -->
+    <div id="commentpager" class="text-center">
+        {cms:commentinfo type="full" /} 
+    </div>
+    <!-- E 评论分页 -->
+
+    <!-- S 发表评论 -->
+    <div id="postcomment">
+        <h3>发表评论 <a href="javascript:;"><small>取消回复</small></a></h3> 
+        <form action="{:addon_url('cms/comment/post')}" method="post" id="postform">  
+            {:token()}
+            <input type="hidden" name="type" value="[type]" />
+            <input type="hidden" name="aid" value="{$[aid]}" />
+            <input type="hidden" name="pid" id="pid" value="0" />
+            <div class="form-group">
+                <label class="control-label" for="username"><small>名称 (必须)</small></label>
+                <input type="text" class="form-control" style="width:40%;" name="username" id="username" value="" size="22" tabindex="1" /> 
+            </div> 
+            <div class="form-group">
+                <label class="control-label" for="email"><small>邮件地址 (不会被公开) (必须)</small></label>
+                <input type="text" class="form-control" style="width:40%;" name="email" id="email" value="" size="22" tabindex="2" /> 
+            </div> 
+            <div class="form-group">
+                <label class="control-label" for="url"><small>网站或博客</small></label>
+                <input type="text" class="form-control" style="width:40%;" name="website" id="website" value="" size="22" tabindex="3" /> 
+            </div> 
+            <div class="form-group">
+                <label class="control-label" for="url"><small>评论内容</small></label>
+                <textarea name="content" class="form-control" id="commentcontent" cols="6" rows="5" tabindex="4"></textarea>
+            </div> 
+            <div class="form-group">
+                <input name="submit" type="submit" id="submit" tabindex="5" value="提交评论(Ctrl+回车)" class="btn btn-primary" />
+                <span id="actiontips"></span>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input name="rememberme" type="checkbox" class="checkbox" tabindex="6" checked value="1" /> 记住我的信息，方便下次评论
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input name="subscribe" type="checkbox" class="checkbox" tabindex="7" checked value="1" /> 有人回复时邮件通知我
+                </label>
+            </div>
+        </form> 
+    </div> 
+    <!-- E 发表评论 -->
+</div>
